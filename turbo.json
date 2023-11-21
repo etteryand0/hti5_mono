@@ -1,0 +1,25 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "dotEnv": [".env.production.local"]
+    },
+    "lint": {},
+    "test": {
+      "dotEnv": [".env.production.local"]
+    },
+    "clean": {},
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dotEnv": [".env.development.local"]
+    }
+  },
+  "globalEnv": [
+    "DATABASE_URL",
+    "API_URL"
+  ] 
+}

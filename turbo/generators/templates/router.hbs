@@ -1,0 +1,6 @@
+import { z } from 'zod'
+import { publicProcedure, createTRPCRouter } from "../trpc"
+
+export const {{name}}Router = createTRPCRouter({
+    endpoint: publicProcedure.query(() => "hello")
+})

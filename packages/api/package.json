@@ -1,0 +1,32 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "UNLICENSED",
+  "scripts": {
+    "clean": "rimraf .turbo node_modules",
+    "lint": "eslint .",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@trpc/server": "^10",
+    "bcrypt": "^5.1.1",
+    "db": "*",
+    "jsonwebtoken": "^9.0.2",
+    "superjson": "2.2.0",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.5",
+    "eslint": "^8",
+    "eslint-config-custom": "*",
+    "prettier": "^3.0.3",
+    "rimraf": "^3.0.2",
+    "tsconfig": "*",
+    "typescript": "^5.2.2"
+  }
+}

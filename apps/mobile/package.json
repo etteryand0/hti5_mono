@@ -1,0 +1,55 @@
+{
+  "name": "mobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf node_modules .turbo",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "lint": "eslint .",
+    "start": "react-native start",
+    "dev": "react-native start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.19.5",
+    "@react-navigation/bottom-tabs": "^6.5.11",
+    "@react-navigation/native": "^6.1.9",
+    "@tanstack/react-query": "^4.0.0",
+    "@trpc/client": "^10",
+    "@trpc/react-query": "^10.43.6",
+    "api": "*",
+    "jotai": "^2.5.1",
+    "react": "18.2.0",
+    "react-native": "0.72.7",
+    "react-native-safe-area-context": "^4.7.4",
+    "superjson": "2.2.0",
+    "react-native-screens": "^3.27.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@jest/globals": "^29.7.0",
+    "@react-native/eslint-config": "^0.72.2",
+    "@react-native/metro-config": "^0.72.11",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.2.3",
+    "@types/react": "^18.0.24",
+    "@types/react-test-renderer": "^18.0.0",
+    "babel-jest": "^29.2.1",
+    "eslint": "^8",
+    "jest": "^29.2.1",
+    "metro-react-native-babel-preset": "0.76.8",
+    "prettier": "^3.0.3",
+    "react-test-renderer": "18.2.0",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^22.0.8",
+    "semantic-release-react-native": "^1.8.2",
+    "typescript": "4.8.4"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
