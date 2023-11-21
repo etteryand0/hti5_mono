@@ -14,14 +14,14 @@ jobs:
       - name: Build nextjs app
         run: yarn workspace web run build
 
-      - name: Stop pm2 proccess
-        run: pm2 stop web
+      # - name: Stop pm2 proccess
+      #   run: pm2 stop web
 
       - name: Delete active build
         run: rm -rf /home/etteryand/hti5_mono/apps/web/.next
 
       - name: Move nextjs build
-        run: mv apps/web/.next /etteryand/hti5_mono/apps/web
+        run: mv apps/web/.next /home/etteryand/hti5_mono/apps/web
 
       - name: Restart pm2 process
         run: pm2 restart web
