@@ -4,17 +4,13 @@ import React from 'react'
 // import { api } from "../trpc/server"
 import { api } from '../trpc/client'
 
-export default function Home(props: any) {
+export default function Home() {
   // const pong = await api.pingpong.ping.useQuery()
   const { mutate } = api.auth.login.useMutation()
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    mutate({ email: "etteryand@gmail.com", password: "12345678" }, {
-      onSuccess: ({ token }) => {
-        console.log(token, props)
-      }
-    })
+    mutate({ email: "etteryand@gmail.com", password: "12345678" })
   }
 
   return (
