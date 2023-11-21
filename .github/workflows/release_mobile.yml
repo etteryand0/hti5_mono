@@ -1,4 +1,4 @@
-name: Release mobile and web
+name: Release mobile
 
 on: workflow_dispatch
 
