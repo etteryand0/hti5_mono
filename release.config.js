@@ -2,7 +2,10 @@ const config = {
   branches: ['main'],
   plugins: [
     '@semantic-release/commit-analyzer',
-    'semantic-release-react-native',
+    ['semantic-release-react-native', {
+      skipIos: true,
+      androidPath: "apps/mobile/android/app/build.gradle"
+    }],
     '@semantic-release/release-notes-generator',
     [
       '@semantic-release/git',
