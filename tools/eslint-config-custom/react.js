@@ -43,5 +43,7 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-condition": "off",
     "import/order": "off",
     "eslint-comments/require-description": "off",
+    "import/no-named-as-default": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
   },
 };
