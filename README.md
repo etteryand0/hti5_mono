@@ -1,81 +1,44 @@
-# Turborepo starter
+# Склад Севера
+Проект создан в рамках хакатона «Hack-the-Ice 5.0. Old School» 2023.
 
-This is an official starter Turborepo.
+## Суровые условия крайнего севера
+В условиях Крайнего Севера и арктических районов существует проблема связанная с контролем запасов продовольствия и лекарств, управлением своими запасами и обеспечением доступности необходимых ресурсов.
+1. Недостаточность поставок продовольствия и лекарств
+2. Неэффективный учет и контроль запасов
+3. Слабая организация управления запасами
+4. Ограниченная доступность
 
-## Using this example
+## Разработка приложения "Склад Севера"
+Наш проект “Склад Севера” решает  проблемы: недостаточности поставок продовольствия и лекарств, низкоэффективности учета и контроля запасов, слабой организации управления запасами, ограниченности доступности - у владельцев и покупателей розничных магазинов и аптек крайнего севера, с помощью цифрового решения - создания мобильного приложения, которое имеет возможности для: 
+1. Аналитики и прогнозирования спроса
+2. Учета и контроля запасов
+3. Автоматизированного мониторинга и управления запасами
+4. Оптимизации логистики и доставки;
+5. Портала для информационного обмена
 
-Run the following command:
+## Техническое задание
+Must-have
+1. Авторизация
+2. Планирование поставок, учет продаж (контрль инвентаря)
+3. Таблица продуктов, срок годности которых скоро истечет
+4. Рекомендации к закупке
 
-```sh
-npx create-turbo@latest
-```
+Желательно
+1. Бронирование частными лицами продуктов
+2. Запрос частными лицами закупа у магазина
 
-## What's inside?
+В далеком будущем
+1. Полная автономность приложения
+2. Уведомление частных лиц о новых поступлениях в местных магазинах
 
-This Turborepo includes the following packages/apps:
+## Стек технологий
+![Стек технологий](docs/stack.png)
 
-### Apps and Packages
+## Команда «Imbir'»
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+| <img src="docs/milana.png" width="150" />       |       <img src="docs/vladimir.png" width="150" />        |     <img src="docs/sergei.png" width="150" /> |
+| :---------------------------------------------- | :------------------------------------------------------: | --------------------------------------------: |
+| Лаптева Милана                                  |                     Владимир Корякин                     |                                 Сергин Сергей |
+| Менеджер                                        |                         Дизайнер                         |                                   Разработчик |
+| +7 (996) 914-58-22 <br /> mlapteva162@gmail.com | +7 (999) 435-67-07 <br /> vladimirkoryakin9459@gmail.com | +7 (984) 109-30-55 <br /> etteryand@gmail.com |
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
