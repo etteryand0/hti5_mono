@@ -23,7 +23,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             type: "modify",
             path: "packages/api/src/root.ts",
             pattern: /(\/\/ Router exports)/g,
-            template: "{{name}}: {{name}}Router\n$1"
+            template: "  {{name}}: {{name}}Router,\n$1"
         },
         {
             type: "modify",
