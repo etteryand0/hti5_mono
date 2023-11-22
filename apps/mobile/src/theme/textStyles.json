@@ -1,0 +1,37 @@
+{
+    "irrelevant-regular": {
+        "fontSize": 12,
+        "fontFamily": "Onest-Regular",
+        "letterSpacing": 0
+    },
+    "irrelevant-medium": {
+        "fontSize": 12,
+        "fontFamily": "Onest-Medium",
+        "letterSpacing": 0
+    },
+    "irrelevant-transparent": {
+        "fontSize": 8,
+        "fontFamily": "Onest-Regular",
+        "letterSpacing": 0
+    },
+    "irrelevant-date": {
+        "fontSize": 10,
+        "fontFamily": "Onest-Regular",
+        "letterSpacing": 0
+    },
+    "mobile-medium-title": {
+        "fontSize": 24,
+        "fontFamily": "Onest-Medium",
+        "letterSpacing": 0
+    },
+    "mobile-medium-subtitle": {
+        "fontSize": 14,
+        "fontFamily": "Onest-Medium",
+        "letterSpacing": 0
+    },
+    "buttons-base": {
+        "fontSize": 12,
+        "fontFamily": "Onest-Medium",
+        "letterSpacing": 0
+    }
+}

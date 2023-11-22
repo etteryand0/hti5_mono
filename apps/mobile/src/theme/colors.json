@@ -1,0 +1,102 @@
+{
+    "contrast": {
+        "light": "#0767fd"
+    },
+    "contrast-1": {
+        "dark": "#373c65"
+    },
+    "contrast-2": {
+        "black": "#000000"
+    },
+    "contrast-3": {
+        "medium": "#383838"
+    },
+    "icons": {
+        "irrelevant": "#9ea8bc"
+    },
+    "low-contrast": {
+        "light-1": "#ffffff"
+    },
+    "low-contrast-1": {
+        "dark-1": "#8f939c"
+    },
+    "buttons": {
+        "base": {
+        "default": "#407bff"
+        }
+    },
+    "buttons-1": {
+        "base-1": {
+        "hovered": "#384290"
+        }
+    },
+    "buttons-2": {
+        "base-2": {
+        "pressed": "#373c65"
+        }
+    },
+    "buttons-3": {
+        "text": {
+        "default-1": "#f2f2f2"
+        }
+    },
+    "buttons-4": {
+        "text-1": {
+        "hovered-1": "#b8b8b8"
+        }
+    },
+    "buttons-5": {
+        "text-2": {
+        "pressed-1": "#999898"
+        }
+    },
+    "buttons-6": {
+        "text-3": {
+        "black-hule": "#000000"
+        }
+    },
+    "buttons-7": {
+        "stroke": {
+        "irrelevant-1": "#959595"
+        }
+    },
+    "elements": {
+        "light-2": "#407bff"
+    },
+    "elements-1": {
+        "white-hule": "#ffffff"
+    },
+    "elements-2": {
+        "text-field": "#f7f8fa"
+    },
+    "elements-3": {
+        "text-field-stroke": "#f3f3f5"
+    },
+    "elements-4": {
+        "dark-2": "#373c65"
+    },
+    "elements-5": {
+        "irrelevant-dark": "#616469"
+    },
+    "elements-6": {
+        "field": "#f0f4fd"
+    },
+    "text-4": {
+        "light-3": "#407bff"
+    },
+    "text-5": {
+        "dark-3": "#373c65"
+    },
+    "text-6": {
+        "light-irrelevant": "#a4acb7"
+    },
+    "text-7": {
+        "dark-irrelevant": "#616469"
+    },
+    "text-8": {
+        "black-hule-1": "#000000"
+    },
+    "text-9": {
+        "transparent": "#ffffff80"
+    }
+}
