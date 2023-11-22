@@ -11,10 +11,8 @@ const getUrl = (): string => {
     if (process.env.NODE_ENV === 'development') {
         return `http://localhost:${process.env.PORT ?? 3000}/api/trpc`
     }
-    if (process.env.API_URL) {
-        return process.env.API_URL
-    }
-    throw new Error("React-antive no API URL in production")
+
+    return 'https://imbir.space/api/trpc'
 }
 
 const TRPCProvider = ({ children }: React.PropsWithChildren) => {
