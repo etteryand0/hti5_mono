@@ -35,5 +35,6 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
     "import/no-named-as-default-member": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "unicorn/filename-case": "off",
   }
 };
