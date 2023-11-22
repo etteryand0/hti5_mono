@@ -24,7 +24,6 @@ model Store {
     ownerId    String
     store_type StoreType
 
-    regionId       Int
     town           String
     address        String
     title          String
