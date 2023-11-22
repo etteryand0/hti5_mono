@@ -54,7 +54,7 @@ model PurchaseProduct {
 
     barcode         Barcode       @relation(fields: [barcodeId], references: [code])
     barcodeId       Int
-    PurchaseBatch   PurchaseBatch @relation(fields: [purchaseBatchId], references: [id])
+    purchaseBatch   PurchaseBatch @relation(fields: [purchaseBatchId], references: [id])
     purchaseBatchId Int
 
     expirationDate        DateTime
