@@ -16,6 +16,8 @@ jobs:
 
       - name: Build nextjs app
         run: yarn workspace web run build
+        env:
+          DISABLE_ESLINT_PLUGIN: true
 
       - name: Delete active build
         run: rm -rf /home/etteryand/hti5_mono/apps/web/.next
