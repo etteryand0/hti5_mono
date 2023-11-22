@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { TRPCError } from '@trpc/server'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { publicProcedure, createTRPCRouter, UserTokenPayload } from "../trpc"
+import { publicProcedure, createTRPCRouter, protectedProcedure } from "../trpc"
 
 export const authRouter = createTRPCRouter({
     login: publicProcedure.input(z.object({
@@ -11,7 +11,7 @@ export const authRouter = createTRPCRouter({
     })).mutation(async ({ input, ctx }) => {
         const credUser = await ctx.db.user.findUnique({ 
             where: { email: input.email },
-            select: { id: true, password: true }
+            select: { id: true, password: true, isStoreOwner: true }
         })
 
         if (credUser === null) {
@@ -25,7 +25,8 @@ export const authRouter = createTRPCRouter({
 
         const token = jwt.sign({
             email: input.email,
-            sub: credUser.id
+            sub: credUser.id,
+            isStoreOwner: credUser.isStoreOwner,
         }, "jwtsecret")
 
         return { token }
@@ -47,16 +48,29 @@ export const authRouter = createTRPCRouter({
         const createdUser = await ctx.db.user.create({
             data: {
                 email: input.email,
-                password: hashedPassword
+                password: hashedPassword,
+                isStoreOwner: false
             },
             select: { id: true }
         })
         // create user
         const token = jwt.sign({
             email: input.email,
-            sub: createdUser.id
+            sub: createdUser.id,
+            isStoreOwner: false,
         }, 'jwtsecret')
 
         return { token }
+    }),
+
+    becomeStoreOwner: protectedProcedure.mutation(async ({ ctx }) => {
+        await ctx.db.user.update({
+            where: {
+                id: ctx.user.sub
+            },
+            data: {
+                isStoreOwner: { set: true },
+            }
+        })
     })
 })

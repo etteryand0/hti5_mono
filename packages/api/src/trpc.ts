@@ -25,6 +25,7 @@ import jwt from 'jsonwebtoken'
 export interface UserTokenPayload {
   sub: string
   email: string
+  isStoreOwner: boolean
 }
 interface CreateContextOptions {
   user: UserTokenPayload | null
@@ -135,3 +136,18 @@ const enforceUserIsAuthed = t.middleware(opts => {
 })
 
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed)
+
+const enforceUserIsAuthedAndIsStoreOwner = t.middleware(opts => {
+  if (opts.ctx.user === null || !opts.ctx.user.isStoreOwner) {
+    throw new TRPCError({ code: "UNAUTHORIZED" })
+  }
+
+  return opts.next({
+    ...opts,
+    ctx: {
+      user: opts.ctx.user
+    }
+  })
+})
+
+export const protectedStoreOwnerProcedure = t.procedure.use(enforceUserIsAuthedAndIsStoreOwner)
