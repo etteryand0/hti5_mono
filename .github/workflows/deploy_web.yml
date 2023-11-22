@@ -11,11 +11,11 @@ jobs:
       - name: Install dependencies
         run: yarn workspace web install --frozen-lockfile
 
+      - name: Generate Prisma client
+        run: yarn workspace db generate
+
       - name: Build nextjs app
         run: yarn workspace web run build
-
-      # - name: Stop pm2 proccess
-      #   run: pm2 stop web
 
       - name: Delete active build
         run: rm -rf /home/etteryand/hti5_mono/apps/web/.next
