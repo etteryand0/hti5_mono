@@ -29,14 +29,14 @@ export const purchaseBatchRouter = createTRPCRouter({
         return result
     }),
 
-    create: protectedStoreOwnerProcedure.input(z.object({
-        code: z.number(),
-        internalName: z.string(),
-    })).mutation(async ({ input, ctx }) => {
-        const result = await ctx.db.barcode.create({
-            data: input
-        })
+    // create: protectedStoreOwnerProcedure.input(z.object({
+    //     code: z.number(),
+    //     internalName: z.string(),
+    // })).mutation(async ({ input, ctx }) => {
+    //     const result = await ctx.db.barcode.create({
+    //         data: input
+    //     })
 
-        return result
-    })
+    //     return result
+    // })
 })
