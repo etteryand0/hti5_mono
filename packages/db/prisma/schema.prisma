@@ -12,14 +12,59 @@ model User {
     email    String @unique
     password String
 
+    is_store_owner Boolean
+    owned_stores   Store[]
+
     createdAt DateTime @default(now())
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
+model Store {
+    id         Int       @id @default(autoincrement())
+    owner      User      @relation(fields: [ownerId], references: [id])
+    ownerId    String
+    store_type StoreType
+
+    regionId       Int
+    town           String
+    address        String
+    title          String
+    media          String[]
+    contact_number String?
+    products       Product[]
+
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
 
-    @@index([name])
+model Product {
+    id           Int        @id
+    price        Int?
+    display_name String
+    cateogory    Category[]
+    Store        Store      @relation(fields: [storeId], references: [id])
+    storeId      Int
+
+    barcode   Barcode @relation(fields: [barcodeId], references: [code])
+    barcodeId Int
+    count     Int
+}
+
+model Barcode {
+    code          Int       @id
+    internal_name String
+    products      Product[]
+}
+
+model Category {
+    id           Int    @id @default(autoincrement())
+    display_name String
+    name         String
+
+    products Product[]
+}
+
+enum StoreType {
+    Grocery
+    Pharmacy
+    Other
 }
