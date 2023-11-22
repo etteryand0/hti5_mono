@@ -12,8 +12,8 @@ model User {
     email    String @unique
     password String
 
-    is_store_owner Boolean
-    owned_stores   Store[]
+    isStoreOwner Boolean
+    ownedStores  Store[]
 
     createdAt DateTime @default(now())
 }
@@ -24,40 +24,69 @@ model Store {
     ownerId    String
     store_type StoreType
 
-    town           String
-    address        String
-    title          String
-    media          String[]
-    contact_number String?
-    products       Product[]
+    town            String
+    address         String
+    title           String
+    media           String[]
+    contactNumber   String?
+    storage         Product[]
+    purchaseBatches PurchaseBatch[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 
 model Product {
-    id           Int        @id
-    price        Int?
-    display_name String
-    cateogory    Category[]
-    Store        Store      @relation(fields: [storeId], references: [id])
-    storeId      Int
+    id          Int        @id
+    price       Int?
+    displayName String
+    cateogory   Category[]
+    Store       Store      @relation(fields: [storeId], references: [id])
+    storeId     Int
 
     barcode   Barcode @relation(fields: [barcodeId], references: [code])
     barcodeId Int
     count     Int
 }
 
+model PurchaseProduct {
+    id Int @id @default(autoincrement())
+
+    barcode         Barcode       @relation(fields: [barcodeId], references: [code])
+    barcodeId       Int
+    PurchaseBatch   PurchaseBatch @relation(fields: [purchaseBatchId], references: [id])
+    purchaseBatchId Int
+
+    expirationDate        DateTime
+    count                 Int
+    wholesalePricePerUnit Int
+}
+
+model PurchaseBatch {
+    id Int @id @default(autoincrement())
+
+    isGenesis Boolean           @default(false)
+    products  PurchaseProduct[]
+    store     Store             @relation(fields: [storeId], references: [id])
+    storeId   Int
+    createdAt DateTime          @default(now())
+    dealAt    DateTime
+
+    complete Boolean @default(false)
+    canceled Boolean @default(false)
+}
+
 model Barcode {
-    code          Int       @id
-    internal_name String
-    products      Product[]
+    code             Int               @id
+    internalName     String
+    products         Product[]
+    purchaseProducts PurchaseProduct[]
 }
 
 model Category {
-    id           Int    @id @default(autoincrement())
-    display_name String
-    name         String
+    id          Int    @id @default(autoincrement())
+    displayName String
+    name        String
 
     products Product[]
 }
