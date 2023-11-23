@@ -13,10 +13,10 @@ import SearchIcon from '../components/svg/Search'
 import IncomesIcon from '../components/svg/Timeplate'
 
 
-type BottomTabParamList = {
+export type BottomTabParamList = {
     Incomes: undefined
     Search: undefined
-    Home: undefined
+    Home: { code?: string }
     Cart: undefined
     Profile: undefined
 }
@@ -40,8 +40,6 @@ const TabsNavigator = () => {
             tabBarStyle: {
                 height: 70,
             },
-            tabBarItemStyle: {
-            }
         }}>
             <Tab.Screen component={Incomes} name="Incomes" options={{ tabBarIcon: IncomesBarIcon, }} />
             <Tab.Screen component={Search} name="Search" options={{ tabBarIcon: SearchBarIcon, }} />

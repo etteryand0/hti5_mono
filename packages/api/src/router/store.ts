@@ -1,7 +1,17 @@
 import { z } from 'zod'
-import { publicProcedure, createTRPCRouter, protectedStoreOwnerProcedure } from "../trpc"
+import { publicProcedure, createTRPCRouter, protectedProcedure } from "../trpc"
 
 export const storeRouter = createTRPCRouter({
+    listMine: protectedProcedure.query(async ({ ctx }) => {
+        const results = await ctx.db.store.findMany({
+            where: {
+                ownerId: { equals: ctx.user.sub } 
+            }
+        })
+
+        return results
+    }),
+
     list: publicProcedure.query(async ({ ctx }) => {
         const results = await ctx.db.store.findMany({
             orderBy: {
@@ -24,12 +34,12 @@ export const storeRouter = createTRPCRouter({
         return store
     }),
     
-    create: protectedStoreOwnerProcedure.input(z.object({
+    create: protectedProcedure.input(z.object({
         town: z.string(),
         address: z.string(),
         title: z.string(),
         store_type: z.enum(["Grocery", "Pharmacy", "Other"]),
-        contact_number: z.string().nullable(),
+        contactNumber: z.string().optional(),
     }))
     .mutation(async ({ input, ctx }) => {
         const result = await ctx.db.store.create({
@@ -41,7 +51,7 @@ export const storeRouter = createTRPCRouter({
         return result
     }),
 
-    delete: protectedStoreOwnerProcedure.input(z.object({
+    delete: protectedProcedure.input(z.object({
         id: z.number(),
     })).mutation(async ({ input, ctx }) => {
         const result = await ctx.db.store.delete({

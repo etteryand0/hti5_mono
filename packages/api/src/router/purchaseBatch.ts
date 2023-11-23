@@ -29,14 +29,19 @@ export const purchaseBatchRouter = createTRPCRouter({
         return result
     }),
 
-    // create: protectedStoreOwnerProcedure.input(z.object({
-    //     code: z.number(),
-    //     internalName: z.string(),
-    // })).mutation(async ({ input, ctx }) => {
-    //     const result = await ctx.db.barcode.create({
-    //         data: input
-    //     })
+    createUnplanned: protectedStoreOwnerProcedure.input(z.object({
+        code: z.number(),
+        internalName: z.string(),
+    })).mutation(async ({ input, ctx }) => {
+        const result = await ctx.db.purchaseBatch.create({
+            data: {
+                dealAt: new Date(),
+                products: [
+                    { connect: {} }
+                ]
+            }
+        })
 
-    //     return result
-    // })
+        return result
+    })
 })

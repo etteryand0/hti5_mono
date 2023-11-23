@@ -52,7 +52,10 @@ const Login = ({ navigation }: StackScreenProps<"Login">) => {
             onSuccess(data) {
                 setAuthToken(data.token)
                 setUser(data.user)
-                AsyncStorage.setItem('authToken', data.token).finally(() => null)
+                AsyncStorage.multiSet([
+                    ['authToken', JSON.stringify(data.token)],
+                    ['user', JSON.stringify(data.user)]
+                ]).then(() => null).catch(() => null)
                 navigation.reset({
                     index: 0,
                     routes: [{ name: "Tabs" }]

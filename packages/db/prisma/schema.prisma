@@ -47,7 +47,7 @@ model Product {
     storeId     Int
 
     barcode   Barcode @relation(fields: [barcodeId], references: [code])
-    barcodeId Int
+    barcodeId String
     count     Int
 }
 
@@ -55,13 +55,12 @@ model PurchaseProduct {
     id Int @id @default(autoincrement())
 
     barcode         Barcode       @relation(fields: [barcodeId], references: [code])
-    barcodeId       Int
+    barcodeId       String
     purchaseBatch   PurchaseBatch @relation(fields: [purchaseBatchId], references: [id])
     purchaseBatchId Int
 
-    expirationDate        DateTime
-    count                 Int
-    wholesalePricePerUnit Int
+    expirationDate DateTime
+    count          Int
 }
 
 model PurchaseBatch {
@@ -79,7 +78,7 @@ model PurchaseBatch {
 }
 
 model Barcode {
-    code             Int               @id
+    code             String            @id
     internalName     String
     products         Product[]
     purchaseProducts PurchaseProduct[]

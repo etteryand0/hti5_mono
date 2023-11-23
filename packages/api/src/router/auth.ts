@@ -52,7 +52,7 @@ export const authRouter = createTRPCRouter({
                 name: input.name,
                 town: input.town,
                 password: hashedPassword,
-                isStoreOwner: false
+                isStoreOwner: true
             }
         })
         // create user

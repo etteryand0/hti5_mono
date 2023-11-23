@@ -50,9 +50,12 @@ const Signup = ({ navigation }: StackScreenProps<"Signup">) => {
     const onSubmit = (formdata: FormData) => {
         mutate(formdata, {
             onSuccess(data) {
+                AsyncStorage.multiSet([
+                    ['authToken', JSON.stringify(data.token)],
+                    ['user', JSON.stringify(data.user)]
+                ]).then(() => null).catch(() => null)
                 setAuthToken(data.token)
                 setUser(data.user)
-                AsyncStorage.setItem('authToken', data.token).then(() => null).catch(() => null)
                 navigation.reset({
                     index: 0,
                     routes: [{ name: "Tabs" }]
