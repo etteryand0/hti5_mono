@@ -9,7 +9,7 @@ interface TypographyProps extends TextProps {
 }
 
 const Typography = ({ children, color, variant = "irrelevant-regular", ...props }: TypographyProps) => {
-    const style = color ? { color } : {}
+    const style = color ? { color } : { color: "#000" }
     return (
         <Text
             {...props}
