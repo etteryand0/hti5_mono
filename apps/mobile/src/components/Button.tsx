@@ -5,7 +5,7 @@ import COLORS from "../theme/colors.json"
 import Typography from "./Typography"
 
 interface ButtonProps extends Omit<TouchableNativeFeedbackProps, "children"> {
-    title: string
+    title: string | React.ReactNode
     variant?: "fill" | "outline"
     innerStyle?: ViewStyle
 }

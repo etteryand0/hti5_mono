@@ -4,6 +4,8 @@ import type { AppRouter } from 'api';
 import { createTRPCReact } from '@trpc/react-query';
 import { httpBatchLink, loggerLink } from "@trpc/client";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useAtomValue } from 'jotai';
+import { authTokenAtom } from '../atoms/authToken';
 
 export const api = createTRPCReact<AppRouter>();
 
@@ -16,6 +18,7 @@ const getUrl = (): string => {
 }
 
 const TRPCProvider = ({ children }: React.PropsWithChildren) => {
+    const authToken = useAtomValue(authTokenAtom)
     const queryClient = useMemo(() => new QueryClient(), []);
 
     const trpcClient = useMemo(() =>
@@ -30,13 +33,17 @@ const TRPCProvider = ({ children }: React.PropsWithChildren) => {
                 httpBatchLink({
                     url: getUrl(),
                     headers() {
-                        return {
+                        const headers: Record<string, string> = {
                             "x-trpc-source": "mobile"
                         }
+                        if (authToken) {
+                            headers["Authorization"] = `Bearer ${authToken}`
+                        }
+                        return headers
                     }
                 })
             ],
-        }), []);
+        }), [authToken]);
 
     return (
         <api.Provider client={trpcClient} queryClient={queryClient}>

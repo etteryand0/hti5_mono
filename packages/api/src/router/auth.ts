@@ -11,7 +11,6 @@ export const authRouter = createTRPCRouter({
     })).mutation(async ({ input, ctx }) => {
         const credUser = await ctx.db.user.findUnique({ 
             where: { email: input.email },
-            select: { id: true, password: true, isStoreOwner: true }
         })
 
         if (credUser === null) {
@@ -29,10 +28,12 @@ export const authRouter = createTRPCRouter({
             isStoreOwner: credUser.isStoreOwner,
         }, "jwtsecret")
 
-        return { token }
+        return { token, user: credUser }
     }),
 
     signup: publicProcedure.input(z.object({
+        name: z.string().trim(),
+        town: z.string().nullable(),
         email: z.string().trim().email(),
         password: z.string().trim().min(8).max(128)
     })).mutation(async ({ input, ctx }) => {
@@ -48,10 +49,11 @@ export const authRouter = createTRPCRouter({
         const createdUser = await ctx.db.user.create({
             data: {
                 email: input.email,
+                name: input.name,
+                town: input.town,
                 password: hashedPassword,
                 isStoreOwner: false
-            },
-            select: { id: true }
+            }
         })
         // create user
         const token = jwt.sign({
@@ -60,7 +62,7 @@ export const authRouter = createTRPCRouter({
             isStoreOwner: false,
         }, 'jwtsecret')
 
-        return { token }
+        return { token, user: createdUser }
     }),
 
     becomeStoreOwner: protectedProcedure.mutation(async ({ ctx }) => {
