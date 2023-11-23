@@ -1,11 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, StatusBar } from 'react-native'
 import { api } from '../../providers/trpc'
 
 const Home = () => {
     const { isLoading, data } = api.pingpong.ping.useQuery()
     return (
         <View style={styles.container}>
+            <StatusBar backgroundColor="#fff" barStyle="dark-content" />
             <Text>Home screen</Text>
             <Text>
                 {isLoading ? "loading" : JSON.stringify(data)}
@@ -18,6 +19,7 @@ export default Home
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'red',
+        backgroundColor: 'white',
+        height: '100%',
     }
 })

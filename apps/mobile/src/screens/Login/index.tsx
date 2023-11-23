@@ -3,6 +3,7 @@ import React, { useCallback, useState } from 'react'
 import { View, StyleSheet, Pressable, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { useSetAtom } from 'jotai'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import type { StackScreenProps } from '../../navigation/RootStack'
 import COLORS from '../../theme/colors.json'
@@ -51,9 +52,10 @@ const Login = ({ navigation }: StackScreenProps<"Login">) => {
             onSuccess(data) {
                 setAuthToken(data.token)
                 setUser(data.user)
+                AsyncStorage.setItem('authToken', data.token).finally(() => null)
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: "Start" }]
+                    routes: [{ name: "Tabs" }]
                 })
             },
         })

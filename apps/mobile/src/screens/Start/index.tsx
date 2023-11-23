@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, StyleSheet, Dimensions } from 'react-native'
+import { View, Image, StyleSheet, Dimensions, StatusBar } from 'react-native'
 
 import Button from '../../components/Button'
 import Typography from '../../components/Typography'
@@ -14,6 +14,7 @@ const { width } = Dimensions.get('screen')
 const Start = ({ navigation }: StackScreenProps<"Start">) => {
     return (
         <View style={styles.container}>
+            <StatusBar backgroundColor="#fff" barStyle="dark-content" />
             <Image source={ILLUSTRATION_SOURCE} style={styles.illustration} />
             <View style={styles.infoblock}>
                 <View style={styles.logo}>

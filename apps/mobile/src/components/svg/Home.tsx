@@ -11,7 +11,6 @@ const Home = (props: SvgProps) => (
     >
         <G
             clipPath="url(#a)"
-            stroke="#9EA9BC"
             strokeLinecap="round"
             strokeWidth={1.8}
         >
@@ -19,7 +18,7 @@ const Home = (props: SvgProps) => (
         </G>
         <Defs>
             <ClipPath id="a">
-                <Path d="M0 .5h23v21H0z" fill="#fff" />
+                <Path d="M0 .5h23v21H0z" fill={props.stroke} />
             </ClipPath>
         </Defs>
     </Svg>
