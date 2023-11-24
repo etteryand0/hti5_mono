@@ -1,12 +1,12 @@
+import { View, ActivityIndicator } from 'react-native'
 import React from 'react'
-import { View, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native'
-import type { StackScreenProps } from '../../navigation/RootStack'
-import { api } from '../../providers/trpc'
 import Typography from '../../components/Typography'
+import { api } from '../../providers/trpc'
+import type { StackScreenProps } from '../../navigation/RootStack'
 import { Divider, List, ListItem } from '@ui-kitten/components'
 
-const MyShop = ({ route: { params: { id } }, navigation }: StackScreenProps<"MyShop">) => {
-    const { data, isLoading, } = api.store.findUnique.useQuery({ id })
+const Shop = ({ route: { params: { id } } }: StackScreenProps<"Shop">) => {
+    const { data, isLoading } = api.store.findUnique.useQuery({ id })
     const { data: products } = api.products.manyFromStore.useQuery({ storeId: id })
     const { data: expiring } = api.purchaseProduct.soonExpiring.useQuery({ storeId: id })
 
@@ -23,14 +23,15 @@ const MyShop = ({ route: { params: { id } }, navigation }: StackScreenProps<"MyS
         )
     }
 
-    const plan = () => {
-        navigation.navigate("PlanIncome", { storeId: id })
-    }
-
     return (
-        <View style={styles.container}>
-            <Typography variant="mobile-medium-title">{data.title}</Typography>
-
+        <View style={{
+            backgroundColor: '#FBFBFB',
+            paddingHorizontal: 20,
+            paddingVertical: 40,
+            height: '100%'
+        }}>
+            <Typography style={{ marginBottom: 20 }} variant="mobile-medium-title">{data.title}</Typography>
+            <Typography style={{ marginBottom: 15 }}>Создатель: {data.owner.name}</Typography>
             <Typography variant="mobile-medium-subtitle">Инвентарь</Typography>
             {products ? (
                 <List
@@ -60,28 +61,8 @@ const MyShop = ({ route: { params: { id } }, navigation }: StackScreenProps<"MyS
                 />
 
             ) : <ActivityIndicator />}
-
-            <TouchableOpacity onPress={() => { navigation.navigate('CreateUnplannedIncome', { storeId: id }); }} style={styles.button}>
-                <Typography color="#407BFF" style={{ textAlign: 'center' }}>Принять незапланированную поставку</Typography>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={plan} style={styles.button}>
-                <Typography color="#407BFF" style={{ textAlign: 'center' }}>Планировать поставку</Typography>
-            </TouchableOpacity>
         </View>
     )
 }
 
-export default MyShop
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#FBFBFB',
-        paddingHorizontal: 20,
-        paddingVertical: 40,
-        height: '100%'
-    },
-    button: {
-        paddingHorizontal: 20,
-        paddingVertical: 15,
-    }
-})
+export default Shop

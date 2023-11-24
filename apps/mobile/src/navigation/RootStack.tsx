@@ -18,6 +18,7 @@ import CreateShop from '../screens/CreateShop';
 import { userAtom } from '../atoms/user';
 import CreateUnplannedIncome from '../screens/CreateUnplannedIncome';
 import PlanIncome from '../screens/PlanIncome';
+import Shop from '../screens/Shop';
 
 
 type RootStackParamList = {
@@ -28,6 +29,7 @@ type RootStackParamList = {
     BarCodeScanner: { saveResult: (code: string, internalName?: string) => void }
     MyShops: { refetch?: boolean }
     MyShop: { id: number }
+    Shop: { id: number }
     CreateShop: undefined
     CreateUnplannedIncome: { storeId: number }
     PlanIncome: { storeId: number }
@@ -76,6 +78,7 @@ const RootStackNavigator = () => {
                 <Stack.Screen component={BarCodeScanner} name="BarCodeScanner" />
                 <Stack.Screen component={MyShops} name="MyShops" />
                 <Stack.Screen component={MyShop} name="MyShop" />
+                <Stack.Screen component={Shop} name="Shop" />
                 <Stack.Screen component={CreateUnplannedIncome} name="CreateUnplannedIncome" />
                 <Stack.Screen component={PlanIncome} name="PlanIncome" />
                 <Stack.Screen component={CreateShop} name="CreateShop" />
