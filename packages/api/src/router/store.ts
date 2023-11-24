@@ -60,5 +60,5 @@ export const storeRouter = createTRPCRouter({
             }
         })
         return result
-    })
+    }),
 })

@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { protectedStoreOwnerProcedure, createTRPCRouter } from "../trpc"
+import { protectedStoreOwnerProcedure, createTRPCRouter, protectedProcedure } from "../trpc"
 
 export const purchaseProductRouter = createTRPCRouter({
     findManyByBatchId: protectedStoreOwnerProcedure
@@ -14,54 +14,31 @@ export const purchaseProductRouter = createTRPCRouter({
             return results
         }),
 
-
-    addGroup: protectedStoreOwnerProcedure.input(z.object({
-        barcode: z.number(),
-        purchaseBatchId: z.number(),
-        wholesalePricePerUnit: z.number(),
-        count: z.number(),
-        expirationDate: z.date(),
-    })).mutation(async ({ input, ctx }) => {
-        const { barcode, purchaseBatchId, ...data } = input
-        const result = await ctx.db.purchaseProduct.create({
-            data: {
-                ...data,
-                barcode: { connect: { code: barcode }},
-                purchaseBatch: { connect: { id: purchaseBatchId }}
-            },
-            select: { id: true }
-        })
-
-        return result
-    }),
-
-    updateGroup: protectedStoreOwnerProcedure.input(z.object({
-        where: z.object({
-            id: z.number(),
-        }),
-        data: z.object({
-            wholesalePricePerUnit: z.number(),
-            count: z.number(),
-            expirationDate: z.date(),
-        })
-    })).mutation(async ({ input: { where, data }, ctx }) => {
-        const result = await ctx.db.purchaseProduct.update({
-            where,
-            data,
-        })
-
-        return result
-    }),
-
-    deleteGroup: protectedStoreOwnerProcedure.input(z.object({
-        id: z.number(),
-    })).mutation(async ({ input, ctx }) => {
-        const result = await ctx.db.purchaseProduct.delete({
+    soonExpiring: protectedProcedure.input(z.object({
+        storeId: z.number()
+    })).query(async ({ ctx, input }) => {
+        const results = await ctx.db.purchaseProduct.findMany({
             where: {
-                id: input.id,
+                // storeId: input.storeId,
+                purchaseBatch: {
+                    storeId: input.storeId
+                }
+            },
+            select: {
+                barcodeId: true,
+                count: true,
+                expirationDate: true,
+                barcode: {
+                    select: {
+                        internalName: true
+                    }
+                }
             }
         })
 
-        return result
+        const now = new Date()
+        const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, now.getDay())
+
+        return results.filter(({ expirationDate }) => (now.getTime() <= expirationDate.getTime()) && (expirationDate.getTime() <= nextMonth.getTime()))
     })
 })
