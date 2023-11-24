@@ -39,16 +39,16 @@ model Store {
 }
 
 model Product {
-    id          Int        @id
     price       Int?
-    displayName String
-    cateogory   Category[]
-    Store       Store      @relation(fields: [storeId], references: [id])
+    displayName String?
+    store       Store   @relation(fields: [storeId], references: [id])
     storeId     Int
 
     barcode   Barcode @relation(fields: [barcodeId], references: [code])
     barcodeId String
     count     Int
+
+    @@id([storeId, barcodeId])
 }
 
 model PurchaseProduct {
@@ -82,14 +82,6 @@ model Barcode {
     internalName     String
     products         Product[]
     purchaseProducts PurchaseProduct[]
-}
-
-model Category {
-    id          Int    @id @default(autoincrement())
-    displayName String
-    name        String
-
-    products Product[]
 }
 
 enum StoreType {
