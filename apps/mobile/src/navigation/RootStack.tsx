@@ -16,6 +16,8 @@ import MyShops from '../screens/MyShops';
 import MyShop from '../screens/MyShop';
 import CreateShop from '../screens/CreateShop';
 import { userAtom } from '../atoms/user';
+import CreateUnplannedIncome from '../screens/CreateUnplannedIncome';
+import PlanIncome from '../screens/PlanIncome';
 
 
 type RootStackParamList = {
@@ -23,12 +25,12 @@ type RootStackParamList = {
     Login: undefined
     Signup: undefined
     Tabs: NavigatorScreenParams<BottomTabParamList>
-    BarCodeScanner: undefined
-    SaveBarCode: { code: string }
+    BarCodeScanner: { saveResult: (code: string, internalName?: string) => void }
     MyShops: { refetch?: boolean }
     MyShop: { id: number }
     CreateShop: undefined
-    CreateUnplannedIncome: undefined
+    CreateUnplannedIncome: { storeId: number }
+    PlanIncome: { storeId: number }
 }
 
 export type StackScreenProps<T extends keyof RootStackParamList> = SSP<RootStackParamList, T>;
@@ -74,6 +76,8 @@ const RootStackNavigator = () => {
                 <Stack.Screen component={BarCodeScanner} name="BarCodeScanner" />
                 <Stack.Screen component={MyShops} name="MyShops" />
                 <Stack.Screen component={MyShop} name="MyShop" />
+                <Stack.Screen component={CreateUnplannedIncome} name="CreateUnplannedIncome" />
+                <Stack.Screen component={PlanIncome} name="PlanIncome" />
                 <Stack.Screen component={CreateShop} name="CreateShop" />
                 <Stack.Screen component={Login} name="Login" />
                 <Stack.Screen component={Sighnup} name="Signup" />

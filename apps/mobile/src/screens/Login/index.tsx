@@ -53,7 +53,7 @@ const Login = ({ navigation }: StackScreenProps<"Login">) => {
                 setAuthToken(data.token)
                 setUser(data.user)
                 AsyncStorage.multiSet([
-                    ['authToken', JSON.stringify(data.token)],
+                    ['authToken', data.token],
                     ['user', JSON.stringify(data.user)]
                 ]).then(() => null).catch(() => null)
                 navigation.reset({

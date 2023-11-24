@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native'
-import { Iconify } from 'react-native-iconify'
 import Typography from '../../components/Typography'
 import type { TabScreenProps } from '../../navigation/RootStack'
 import { useAtom, useSetAtom } from 'jotai'
