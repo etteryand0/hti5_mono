@@ -28,6 +28,13 @@ export const storeRouter = createTRPCRouter({
         const store = await ctx.db.store.findUnique({
             where: {
                 id: input.id,
+            },
+            include: {
+                owner: {
+                    select: {
+                        name: true
+                    }
+                }
             }
         })
 
