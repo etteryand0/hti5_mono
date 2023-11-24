@@ -4,6 +4,7 @@ import { api } from '../../providers/trpc'
 import type { StackScreenProps } from '../../navigation/RootStack'
 import Typography from '../../components/Typography'
 import Button from '../../components/Button'
+import { List, ListItem } from '@ui-kitten/components'
 
 const MyShops = ({ navigation, route: { params } }: StackScreenProps<"MyShops">) => {
     const { data, isLoading, refetch } = api.store.listMine.useQuery()
@@ -42,10 +43,10 @@ const MyShops = ({ navigation, route: { params } }: StackScreenProps<"MyShops">)
             <Typography style={{ marginBottom: 20 }} variant="mobile-medium-title">Мои магазины</Typography>
             {isLoading || isLoadingDelete ? <ActivityIndicator /> : null}
             {data ? (
-                <View>
-                    {data.map(({ id, address, title }) => (
-                        <TouchableOpacity
-                            key={`Shop-id-${id}`}
+                <List
+                    data={data}
+                    renderItem={({ item: { id, address, title } }) =>
+                        <ListItem
                             onLongPress={() => { actions(id, title); }}
                             onPress={() => { navigation.navigate("MyShop", { id }); }}
                             style={{
@@ -53,14 +54,19 @@ const MyShops = ({ navigation, route: { params } }: StackScreenProps<"MyShops">)
                                 justifyContent: 'center',
                             }}>
                             <Typography>{title} - {address}</Typography>
-                        </TouchableOpacity>
-                    ))}
-                </View>
-            ) : null}
-            {!isLoading ? (
-                <Button onPress={() => { navigation.navigate('CreateShop'); }} title="Создать магазин" />
-            ) : null}
-        </View>
+                        </ListItem>
+                    }
+                />
+            ) : null
+            }
+            {
+                !isLoading ? (
+                    <View style={{ marginTop: 20 }}>
+                        <Button onPress={() => { navigation.navigate('CreateShop'); }} title="Создать магазин" />
+                    </View>
+                ) : null
+            }
+        </View >
     )
 }
 
